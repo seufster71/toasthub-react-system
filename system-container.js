@@ -7,13 +7,16 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { Switch, Route, withRouter, Redirect} from "react-router";
-import * as appPrefActions from '../core/common/apppref-actions';
+import * as systemActions from './system-actions';
 import LoginContainer from '../core/usermanagement/login-container';
 import StatusView from '../coreView/status/status-view';
 import LoadingView from '../coreView/status/loading-view';
 import NavigationView from '../coreView/navigation/navigation-view';
 import DashboardContainer from './dashboard/dashboard-container';
-import LogoutContainer from './logout/logout-container';
+import SystemView from '../systemView/system-view';
+import ClientDomainContainer from './clientdomain/clientdomain-container';
+import ServicesContainer from './services/services-container';
+import ApplicationContainer from './application/application-container';
 import fuLogger from '../core/common/fu-logger';
 import {PrivateRoute} from '../core/common/utils';
 
@@ -24,20 +27,19 @@ class SystemContainer extends Component {
 	}
 
   componentDidMount() {
-    this.props.actions.initMember();
+    this.props.actions.initSystem();
   }
 
   changeTab(code,index) {
-      //this.setState({activeTab:code});
       this.props.history.replace(index);
   }
 
   render() {
-    fuLogger.log({level:'TRACE',loc:'MemberContainer::render',msg:"path "+ this.props.history.location.pathname});
+    fuLogger.log({level:'TRACE',loc:'SystemContainer::render',msg:"path "+ this.props.history.location.pathname});
 
     let myMenus = [];
-    if (this.props.appMenus != null && this.props.appMenus[this.props.appPrefs.memberMenu] != null) {
-      myMenus = this.props.appMenus[this.props.appPrefs.memberMenu];
+    if (this.props.appMenus != null && this.props.appMenus[this.props.appPrefs.systemMenu] != null) {
+      myMenus = this.props.appMenus[this.props.appPrefs.systemMenu];
     }
     let myPermissions = {};
     if (this.props.member != null && this.props.member.user != null && this.props.member.user.permissions != null) {
@@ -45,30 +47,23 @@ class SystemContainer extends Component {
     }
     if (myMenus.length > 0) {
       return (
-        <MemberView>
+        <SystemView>
           <NavigationView appPrefs={this.props.appPrefs} permissions={myPermissions}
           menus={myMenus} changeTab={this.changeTab} activeTab={this.props.history.location.pathname}/>
           <StatusView/>
           <Switch>
             <Route exact path="/" component={DashboardContainer} />
-            <Route exact path="/member" component={DashboardContainer} />
-            <PrivateRoute path="/member-acquaintances" component={AcquaintancesContainer} permissions={myPermissions} code="MA" pathto="/access-denied"/>
-            <PrivateRoute path="/member-groups" component={GroupsContainer} permissions={myPermissions} code="MG" pathto="/access-denied"/>
-            <PrivateRoute path="/member-notes" component={NotesContainer} permissions={myPermissions} code="MN" pathto="/access-denied"/>
-            <PrivateRoute path="/member-submenu" component={SubMenuContainer} permissions={myPermissions} code="MSM" pathto="/access-denied"/>
-            <PrivateRoute path="/member-shopping" component={ShoppingContainer} permissions={myPermissions} code="MS" pathto="/access-denied"/>
-            <PrivateRoute path="/member-profile" component={ProfileContainer} permissions={myPermissions} code="MP" minRights="W" pathto="/access-denied"/>
-            <PrivateRoute path="/member-logout" component={LogoutContainer} permissions={myPermissions} code="ML" pathto="/access-denied"/>
-            <Route path="/admin" render={() => (
-              <Redirect to="/admin"/>
-            )}/>
+            <Route exact path="/system" component={DashboardContainer} />
+            <PrivateRoute path="/system-clientdomain" component={ClientDomainContainer} permissions={myPermissions} code="SCD" pathto="/access-denied"/>
+            <PrivateRoute path="/system-services" component={ServicesContainer} permissions={myPermissions} code="SSC" pathto="/access-denied"/>
+            <PrivateRoute path="/system-application" component={ApplicationContainer} permissions={myPermissions} code="SA" pathto="/access-denied"/>
           </Switch>
-        </MemberView>
+        </SystemView>
       );
     } else {
       return (
-        <MemberView> <LoadingView/>
-        </MemberView>
+        <SystemView> <LoadingView/>
+        </SystemView>
       );
     }
   }
@@ -89,7 +84,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions:bindActionCreators(appPrefActions,dispatch) };
+  return { actions:bindActionCreators(systemActions,dispatch) };
 }
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SystemContainer));
