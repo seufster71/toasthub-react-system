@@ -34,13 +34,15 @@ class ServicesContainer extends Component {
 }
 
 ServicesContainer.propTypes = {
+	appPrefs: PropTypes.object,
 	lang: PropTypes.string,
+	appGlobal: PropTypes.object,
 	actions: PropTypes.object,
 	services: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
-  return {lang:state.lang, services:state.services};
+  return {lang:state.lang, appPrefs:state.appPrefs, services:state.services};
 }
 
 function mapDispatchToProps(dispatch) {

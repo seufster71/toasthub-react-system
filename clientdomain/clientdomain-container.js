@@ -28,7 +28,7 @@ class ClientDomainContainer extends Component {
   render() {
 			fuLogger.log({level:'TRACE',loc:'ClientDomainContainer::render',msg:"Hi there"});
       return (
-				<ClientDomainView clientdomains={this.props.clientdomains}/>
+				<ClientDomainView clientDomains={this.props.clientDomains}/>
 			);
   }
 }
@@ -36,11 +36,11 @@ class ClientDomainContainer extends Component {
 ClientDomainContainer.propTypes = {
 	lang: PropTypes.string,
 	actions: PropTypes.object,
-	clientdomains: PropTypes.object
+	clientDomains: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
-  return {lang:state.lang, clientdomains:state.clientdomains};
+  return {lang:state.lang, clientDomains:state.clientDomains};
 }
 
 function mapDispatchToProps(dispatch) {

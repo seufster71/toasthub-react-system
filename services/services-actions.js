@@ -15,10 +15,10 @@ export function initServices() {
     requestParams.appLabels = new Array("SYSTEM_SERVICE_CRAWLER_TABLE");
     let params = {};
     params.requestParams = requestParams;
-    params.URI = '/api/admin/callService';
+    params.URI = '/api/system/callService';
 
     return callService(params).then( (responseJson) => {
-      dispatch({ type: "LOAD_INIT_SERVICE_CRAWLER", responseJson });
+      dispatch({ type: "LOAD_INIT_SERVICES", responseJson });
     }).catch(error => {
       throw(error);
     });

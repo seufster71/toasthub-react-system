@@ -15,7 +15,7 @@ export function initClientDomain() {
     requestParams.appLabels = new Array("SYSTEM_CLIENT_DOMAIN_TABLE");
     let params = {};
     params.requestParams = requestParams;
-    params.URI = '/api/admin/callService';
+    params.URI = '/api/system/callService';
 
     return callService(params).then( (responseJson) => {
       dispatch({ type: "LOAD_INIT_CLIENT_DOMAIN", responseJson });

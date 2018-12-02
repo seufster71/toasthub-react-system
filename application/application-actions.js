@@ -15,7 +15,7 @@ export function initApplication() {
     requestParams.appLabels = new Array("SYSTEM_APPLICATION_TABLE");
     let params = {};
     params.requestParams = requestParams;
-    params.URI = '/api/admin/callService';
+    params.URI = '/api/system/callService';
 
     return callService(params).then( (responseJson) => {
       dispatch({ type: "LOAD_INIT_APPLICATION", responseJson });

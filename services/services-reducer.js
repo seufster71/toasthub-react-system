@@ -3,7 +3,7 @@ import reducerUtils from '../../core/common/reducer-utils';
 export default function servicesReducer(state = {}, action) {
   let myState = {};
   switch(action.type) {
-    case 'LOAD_INIT_SERVICE_CRAWLER': {
+    case 'LOAD_INIT_SERVICES': {
       return processInit(state,action);
     }
     default:
