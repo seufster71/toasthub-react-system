@@ -116,7 +116,7 @@ class ApplicationContainer extends Component {
 	onSave() {
 		return (event) => {
 			fuLogger.log({level:'TRACE',loc:'ApplicationContainer::onSave',msg:"test"});
-			let errors = utils.validateFormFields(this.props.applications.appForms.ADMIN_APPLICATION_FORM, this.props.applications.inputFields, this.props.appPrefs.appGlobal.APPLICATIONS);
+			let errors = utils.validateFormFields(this.props.applications.prefForms.ADMIN_APPLICATION_FORM, this.props.applications.inputFields, this.props.appPrefs.prefGlobal.APPLICATIONS);
 			
 			if (errors.isValid){
 				let searchCriteria = {'searchValue':this.state['ADMIN_APPLICATION_SEARCH_input'],'searchColumn':'ADMIN_APPLICATION_TABLE_NAME'};
@@ -189,7 +189,7 @@ class ApplicationContainer extends Component {
 				item={this.props.applications.selected}
 				inputFields={this.props.applications.inputFields}
 				appPrefs={this.props.appPrefs}
-				itemAppForms={this.props.applications.appForms}
+				itemPrefForms={this.props.applications.prefForms}
 				onSave={this.onSave}
 				onCancel={this.onCancel}
 				onReturn={this.onCancel}

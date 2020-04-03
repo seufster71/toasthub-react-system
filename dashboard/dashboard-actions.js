@@ -10,9 +10,9 @@ export function initDashboard() {
     let requestParams = {};
     requestParams.action = "INIT";
     requestParams.service = "DASHBOARD_SVC";
-    requestParams.appForms = new Array("SYSTEM_DASHBOARD_FORM");
-    requestParams.appTexts = new Array("SYSTEM_DASHBOARD_PAGE");
-    requestParams.appLabels = new Array("SYSTEM_DASHBOARD_TABLE");
+    requestParams.prefForms = new Array("SYSTEM_DASHBOARD_FORM");
+    requestParams.prefTexts = new Array("SYSTEM_DASHBOARD_PAGE");
+    requestParams.prefLabels = new Array("SYSTEM_DASHBOARD_TABLE");
     let params = {};
     params.requestParams = requestParams;
     params.URI = '/api/system/callService';

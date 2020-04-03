@@ -36,7 +36,6 @@ class ServicesContainer extends Component {
 ServicesContainer.propTypes = {
 	appPrefs: PropTypes.object,
 	lang: PropTypes.string,
-	appGlobal: PropTypes.object,
 	actions: PropTypes.object,
 	services: PropTypes.object
 };

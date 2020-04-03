@@ -11,8 +11,8 @@ export function init() {
 		let requestParams = {};
 		requestParams.action = "INIT";
 		requestParams.service = "APPLICATION_SVC";
-		requestParams.appTexts = new Array("ADMIN_APPLICATION_PAGE");
-		requestParams.appLabels = new Array("ADMIN_APPLICATION_TABLE");
+		requestParams.prefTexts = new Array("ADMIN_APPLICATION_PAGE");
+		requestParams.prefLabels = new Array("ADMIN_APPLICATION_TABLE");
 		let params = {};
 		params.requestParams = requestParams;
 		params.URI = '/api/admin/callService';
@@ -118,7 +118,7 @@ export function application(id) {
 	    let requestParams = {};
 	    requestParams.action = "ITEM";
 	    requestParams.service = "APPLICATION_SVC";
-	    requestParams.appForms = new Array("ADMIN_APPLICATION_FORM");
+	    requestParams.prefForms = new Array("ADMIN_APPLICATION_FORM");
 	    if (id != null) {
 	    	requestParams.itemId = id;
 	    }

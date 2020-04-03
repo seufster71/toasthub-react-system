@@ -8,7 +8,7 @@ export function initSystem() {
       let requestParams = {};
       requestParams.action = "INIT";
       requestParams.service = "SYSTEM_SVC";
-      requestParams.appTexts = new Array("SYSTEM_PAGE");
+      requestParams.prefTexts = new Array("SYSTEM_PAGE");
       requestParams.menuNames = new Array("SYSTEM_MENU_TOP");
       let params = {};
       params.requestParams = requestParams;

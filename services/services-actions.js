@@ -10,9 +10,9 @@ export function initServices() {
     let requestParams = {};
     requestParams.action = "INIT";
     requestParams.service = "SERVICE_CRAWLER_SVC";
-    requestParams.appForms = new Array("SYSTEM_SERVICE_CRAWLER_FORM");
-    requestParams.appTexts = new Array("SYSTEM_SERVICE_CRAWLER_PAGE");
-    requestParams.appLabels = new Array("SYSTEM_SERVICE_CRAWLER_TABLE");
+    requestParams.prefForms = new Array("SYSTEM_SERVICE_CRAWLER_FORM");
+    requestParams.prefTexts = new Array("SYSTEM_SERVICE_CRAWLER_PAGE");
+    requestParams.prefLabels = new Array("SYSTEM_SERVICE_CRAWLER_TABLE");
     let params = {};
     params.requestParams = requestParams;
     params.URI = '/api/system/callService';
