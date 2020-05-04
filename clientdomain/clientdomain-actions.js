@@ -10,9 +10,9 @@ export function initClientDomain() {
     let requestParams = {};
     requestParams.action = "INIT";
     requestParams.service = "CLIENT_DOMAIN_SVC";
-    requestParams.prefForms = new Array("SYSTEM_CLIENT_DOMAIN_FORM");
-    requestParams.prefTexts = new Array("SYSTEM_CLIENT_DOMAIN_PAGE");
-    requestParams.prefLabels = new Array("SYSTEM_CLIENT_DOMAIN_TABLE");
+    requestParams.prefFormKeys = new Array("SYSTEM_CLIENT_DOMAIN_FORM");
+    requestParams.prefTextKeys = new Array("SYSTEM_CLIENT_DOMAIN_PAGE");
+    requestParams.prefLabelKeys = new Array("SYSTEM_CLIENT_DOMAIN_TABLE");
     let params = {};
     params.requestParams = requestParams;
     params.URI = '/api/system/callService';
