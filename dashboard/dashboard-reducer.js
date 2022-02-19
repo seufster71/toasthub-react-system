@@ -15,38 +15,38 @@
  */
 import reducerUtils from '../../core/common/reducer-utils';
 
-export default function clientdomainReducer(state = {}, action) {
+export default function servicesReducer(state = {}, action) {
 	switch(action.type) {
-		case 'SYSTEM_CLIENT_DOMAIN_INIT': {
-    		if (action.responseJson != null && action.responseJson.params != null) {
-				return Object.assign({}, state, {
-					prefForms: Object.assign({}, state.prefForms, reducerUtils.getPrefForms(action)),
-					prefTexts: Object.assign({}, state.prefTexts, reducerUtils.getPrefTexts(action)),
-					prefLabels: Object.assign({}, state.prefLabels, reducerUtils.getPrefLabels(action)),
-					prefOptions: Object.assign({}, state.prefOptions, reducerUtils.getPrefOptions(action)),
-					columns: reducerUtils.getColumns(action),
-					itemCount: reducerUtils.getItemCount(action),
-					items: reducerUtils.getItems(action),
-					listLimit: reducerUtils.getListLimit(action),
+	    case 'SYSTEM_DASHBOARD_INIT': {
+	    	if (action.responseJson != null && action.responseJson.params != null) {
+	    	    return Object.assign({}, state, {
+	    	      	prefForms: Object.assign({}, state.prefForms, reducerUtils.getPrefForms(action)),
+	    	      	prefTexts: Object.assign({}, state.prefTexts, reducerUtils.getPrefTexts(action)),
+	    	      	prefLabels: Object.assign({}, state.prefLabels, reducerUtils.getPrefLabels(action)),
+	    	      	prefOptions: Object.assign({}, state.prefOptions, reducerUtils.getPrefOptions(action)),
+	    	      	columns: reducerUtils.getColumns(action),
+	    	      	itemCount: reducerUtils.getItemCount(action),
+	    	      	items: reducerUtils.getItems(action),
+	    	      	listLimit: reducerUtils.getListLimit(action),
 					listStart: reducerUtils.getListStart(action),
-					orderCriteria: [{'orderColumn':'SYSTEM_CLIENT_DOMAIN_TABLE_NAME','orderDir':'ASC'}],
-    				searchCriteria: [{'searchValue':'','searchColumn':'SYSTEM_CLIENT_DOMAIN_TABLE_NAME'}],
+					orderCriteria: [{'orderColumn':'SYSTEM_DASHBOARD_TABLE_NAME','orderDir':'ASC'}],
+    				searchCriteria: [{'searchValue':'','searchColumn':'SYSTEM_DASHBOARD_TABLE_NAME'}],
     				paginationSegment: 1,
 					selected: null,
 					inputFields:null,
 					view: "MAIN",
-					pageName:"SYSTEM_CLIENT_DOMAIN",
+					pageName:"SYSTEM_DASHBOARD",
 					isDeleteModalOpen: false,
 					errors:null, 
 					warns:null, 
 					successes:null,
 					searchValue:""
-				});
-			} else {
-				return state;
-			}
-		}
-		case 'SYSTEM_CLIENT_DOMAIN_LIST': {
+	    	    });
+	    	  } else {
+	    	    return state;
+	    	  }
+	    }
+		case 'SYSTEM_SERVICE_CRAWLER_LIST': {
 			if (action.responseJson != null && action.responseJson.params != null) {
 				return Object.assign({}, state, {
 					itemCount: reducerUtils.getItemCount(action),
@@ -66,20 +66,20 @@ export default function clientdomainReducer(state = {}, action) {
 				return state;
 			}
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_ITEM': {
+		case 'SYSTEM_SERVICE_CRAWLER_ITEM': {
 			if (action.responseJson !=  null && action.responseJson.params != null) {
 				// load inputFields
 				let inputFields = {};
 				let prefForms = reducerUtils.getPrefForms(action);
-				for (let i = 0; i < prefForms.SYSTEM_CLIENT_DOMAIN_FORM.length; i++) {
-					if (prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].group === "FORM1") {
-						let classModel = JSON.parse(prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].classModel);
+				for (let i = 0; i < prefForms.SYSTEM_SERVICE_CRAWLER_FORM.length; i++) {
+					if (prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].group === "FORM1") {
+						let classModel = JSON.parse(prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].classModel);
 						if (action.responseJson.params.item != null && action.responseJson.params.item[classModel.field] != null) {
-							inputFields[prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].name] = action.responseJson.params.item[classModel.field];
+							inputFields[prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].name] = action.responseJson.params.item[classModel.field];
 						} else {
 							let result = "";
-							if (prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].value != null && prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].value != ""){
-								let formValue = JSON.parse(prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].value);
+							if (prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].value != null && prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].value != ""){
+								let formValue = JSON.parse(prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].value);
 								if (formValue.options != null) {
 									for (let j = 0; j < formValue.options.length; j++) {
 										if (formValue.options[j] != null && formValue.options[j].defaultInd == true){
@@ -100,7 +100,7 @@ export default function clientdomainReducer(state = {}, action) {
 									}
 								}
 							}
-							inputFields[prefForms.SYSTEM_CLIENT_DOMAIN_FORM[i].name] = result;
+							inputFields[prefForms.SYSTEM_SERVICE_CRAWLER_FORM[i].name] = result;
 						}
 					}
 				}
@@ -118,49 +118,49 @@ export default function clientdomainReducer(state = {}, action) {
 				return state;
 			}
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_INPUT_CHANGE': {
+		case 'SYSTEM_SERVICE_CRAWLER_INPUT_CHANGE': {
 			return reducerUtils.updateInputChange(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_CLEAR_FIELD': {
+		case 'SYSTEM_SERVICE_CRAWLER_CLEAR_FIELD': {
 			return reducerUtils.updateClearField(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_LISTLIMIT': {
+		case 'SYSTEM_SERVICE_CRAWLER_LISTLIMIT': {
 			return reducerUtils.updateListLimit(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_SEARCH': { 
+		case 'SYSTEM_SERVICE_CRAWLER_SEARCH': { 
 			return reducerUtils.updateSearch(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_SEARCH_CHANGE': { 
+		case 'SYSTEM_SERVICE_CRAWLER_SEARCH_CHANGE': { 
 			return reducerUtils.updateSearchChange(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_ORDERBY': { 
+		case 'SYSTEM_SERVICE_CRAWLER_ORDERBY': { 
 			return reducerUtils.updateOrderBy(state,action);
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_SET_ERRORS': {
+		case 'SYSTEM_SERVICE_CRAWLER_SET_ERRORS': {
 			return Object.assign({}, state, {
 				errors: action.errors
 			});
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_CLOSE_DELETE_MODAL': {
+		case 'SYSTEM_SERVICE_CRAWLER_CLOSE_DELETE_MODAL': {
 			return Object.assign({}, state, {
 				isDeleteModalOpen: false
 			});
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_OPEN_DELETE_MODAL': {
+		case 'SYSTEM_SERVICE_CRAWLER_OPEN_DELETE_MODAL': {
 			return Object.assign({}, state, {
 				isDeleteModalOpen: true,
 				selected: action.item
 			});
 		}
-		case 'SYSTEM_CLIENT_DOMAIN_CANCEL': {
+		case 'SYSTEM_SERVICE_CRAWLER_CANCEL': {
 			return Object.assign({}, state, {
 				view: "MAIN",
 				selected:null,
 				inputFields:null
 			});
 		}
-		default:
-		return state;
-	}
+	    default:
+	      return state;
+  	}
 }
 

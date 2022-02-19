@@ -5,11 +5,11 @@ import callService from '../../core/api/api-call';
 
 
 // thunks
-export function initDashboard() {
+export function init() {
   return function(dispatch) {
     let requestParams = {};
     requestParams.action = "INIT";
-    requestParams.service = "DASHBOARD_SVC";
+    requestParams.service = "SYSTEM_DASHBOARD_SVC";
     requestParams.prefFormKeys = new Array("SYSTEM_DASHBOARD_FORM");
     requestParams.prefTextKeys = new Array("SYSTEM_DASHBOARD_PAGE");
     requestParams.prefLabelKeys = new Array("SYSTEM_DASHBOARD_TABLE");
@@ -18,7 +18,7 @@ export function initDashboard() {
     params.URI = '/api/system/callService';
 
     return callService(params).then( (responseJson) => {
-      dispatch({ type: "LOAD_INIT_APPLICATION", responseJson });
+      dispatch({ type: "SYSTEM_DASHBOARD_INIT", responseJson });
     }).catch(error => {
       throw(error);
     });

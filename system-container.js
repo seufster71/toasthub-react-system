@@ -5,21 +5,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import * as systemActions from './system-actions';
-import LoginContainer from '../core/usermgnt/login-container';
+import * as actions from './system-actions';
 import StatusView from '../coreView/status/status-view';
 import LoadingView from '../coreView/status/loading-view';
 import NavigationView from '../coreView/navigation/navigation-view';
 import DashboardContainer from './dashboard/dashboard-container';
 import SystemView from '../systemView/system-view';
 import ClientDomainContainer from './clientdomain/clientdomain-container';
-import ServicesContainer from './services/services-container';
+import ServiceContainer from './service/service-container';
 import ApplicationContainer from './application/application-container';
 import fuLogger from '../core/common/fu-logger';
 import {PrivateRoute} from '../core/common/utils';
 
 function SystemContainer() {
-	const member = useSelector((state) => state.member);
 	const session = useSelector((state) => state.session);
 	const appMenus = useSelector((state) => state.appMenus);
 	const appPrefs = useSelector((state) => state.appPrefs);
@@ -28,7 +26,7 @@ function SystemContainer() {
 	const navigate = useNavigate();
   	
 	useEffect(() => {
-    	dispatch(systemActions.initSystem());
+    	dispatch(actions.init());
   	}, []);
 
 	const changeTab = (code,index) => {
@@ -42,8 +40,8 @@ function SystemContainer() {
       myMenus = appMenus[appPrefs.systemMenu];
     }
     let myPermissions = {};
-    if (member != null && member.user != null && member.user.permissions != null) {
-      myPermissions = member.user.permissions;
+    if (session != null && session.selected != null && session.selected.permissions != null) {
+      myPermissions = session.selected.permissions;
     }
     if (myMenus.length > 0) {
       return (
@@ -52,11 +50,16 @@ function SystemContainer() {
           menus={myMenus} changeTab={changeTab} activeTab={location.pathname}/>
           <StatusView/>
           <Routes>
-            <Route exact path="/" component={DashboardContainer} />
-            <Route exact path="/system" component={DashboardContainer} />
-            <PrivateRoute path="/system-clientdomain" component={ClientDomainContainer} permissions={myPermissions} code="SCD" pathto="/access-denied"/>
-            <PrivateRoute path="/system-services" component={ServicesContainer} permissions={myPermissions} code="SSC" pathto="/access-denied"/>
-            <PrivateRoute path="/system-application" component={ApplicationContainer} permissions={myPermissions} code="SA" pathto="/access-denied"/>
+            <Route index component={<DashboardContainer />} />
+ 			<Route element={<PrivateRoute permissions={myPermissions} code="SCD" pathto="/access-denied"/>} >
+				<Route path="/clientdomain/*" element={<ClientDomainContainer />} />
+			</Route>
+         	<Route element={<PrivateRoute permissions={myPermissions} code="SSC" pathto="/access-denied"/>} >
+				<Route path="/services/*" element={<ServiceContainer />} />
+			</Route>
+			<Route element={<PrivateRoute permissions={myPermissions} code="SA" pathto="/access-denied"/>} >
+				<Route path="/application/*" element={<ApplicationContainer />} />
+			</Route>
           </Routes>
         </SystemView>
       );
