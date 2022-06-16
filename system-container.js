@@ -15,7 +15,7 @@ import ClientDomainContainer from './clientdomain/clientdomain-container';
 import ServiceContainer from './service/service-container';
 import ApplicationContainer from './application/application-container';
 import fuLogger from '../core/common/fu-logger';
-import {PrivateRoute} from '../core/common/utils';
+import {PrivateRoute} from '../core/common/router-utils-web';
 
 function SystemContainer() {
 	const session = useSelector((state) => state.session);
