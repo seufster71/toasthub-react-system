@@ -4,17 +4,15 @@
 'use-strict';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 import * as actions from './dashboard-actions';
 import fuLogger from '../../core/common/fu-logger';
 import DashboardView from '../../systemView/dashboard/dashboard-view';
 
-function DashboardContainer() {
+function DashboardContainer({location,navigate}) {
 	const itemState = useSelector((state) => state.systemdashboard);
 	const session = useSelector((state) => state.session);
 	const appPrefs = useSelector((state) => state.appPrefs);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(actions.init({lang:session.selected.lang}));
