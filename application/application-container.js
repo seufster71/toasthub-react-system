@@ -4,7 +4,6 @@
 'use-strict';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 import * as actions from './application-actions';
 import fuLogger from '../../core/common/fu-logger';
 import ApplicationView from '../../systemView/application/application-view';
@@ -14,12 +13,11 @@ import BaseContainer from '../../core/container/base-container';
 /*
 * Application Page
 */
-function ApplicationContainer() {
+function ApplicationContainer({location,navigate}) {
 	const itemState = useSelector((state) => state.systemapplication);
 	const session = useSelector((state) => state.session);
 	const appPrefs = useSelector((state) => state.appPrefs);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(actions.init());
