@@ -19,19 +19,17 @@
 'use-strict';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 import * as actions from './clientdomain-actions';
 import fuLogger from '../../core/common/fu-logger';
 import ClientDomainView from '../../systemView/clientdomain/clientdomain-view';
 import ClientDomainModifyView from '../../systemView/clientdomain/clientdomain-modify-view';
 import BaseContainer from '../../core/container/base-container';
 
-function ClientDomainContainer() {
+function ClientDomainContainer({location,navigate}) {
 	const itemState = useSelector((state) => state.systemclientdomain);
 	const session = useSelector((state) => state.session);
 	const appPrefs = useSelector((state) => state.appPrefs);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(actions.init());

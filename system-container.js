@@ -4,7 +4,7 @@
 'use strict';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; 
 import * as actions from './system-actions';
 import StatusView from '../coreView/status/status-view';
 import LoadingView from '../coreView/status/loading-view';
@@ -17,13 +17,11 @@ import ApplicationContainer from './application/application-container';
 import fuLogger from '../core/common/fu-logger';
 import {PrivateRoute} from '../core/common/router-utils-web';
 
-function SystemContainer() {
+function SystemContainer({location,navigate}) {
 	const session = useSelector((state) => state.session);
 	const appMenus = useSelector((state) => state.appMenus);
 	const appPrefs = useSelector((state) => state.appPrefs);
 	const dispatch = useDispatch();
-	const location = useLocation();
-	const navigate = useNavigate();
   	
 	useEffect(() => {
     	dispatch(actions.init());
@@ -52,13 +50,13 @@ function SystemContainer() {
           <Routes>
             <Route index component={<DashboardContainer />} />
  			<Route element={<PrivateRoute permissions={myPermissions} code="SCD" pathto="/access-denied"/>} >
-				<Route path="/clientdomain/*" element={<ClientDomainContainer />} />
+				<Route path="/clientdomain/*" element={<ClientDomainContainer location={location} navigate={navigate}/>} />
 			</Route>
          	<Route element={<PrivateRoute permissions={myPermissions} code="SSC" pathto="/access-denied"/>} >
-				<Route path="/services/*" element={<ServiceContainer />} />
+				<Route path="/services/*" element={<ServiceContainer location={location} navigate={navigate}/>} />
 			</Route>
 			<Route element={<PrivateRoute permissions={myPermissions} code="SA" pathto="/access-denied"/>} >
-				<Route path="/application/*" element={<ApplicationContainer />} />
+				<Route path="/application/*" element={<ApplicationContainer location={location} navigate={navigate}/>} />
 			</Route>
           </Routes>
         </SystemView>
